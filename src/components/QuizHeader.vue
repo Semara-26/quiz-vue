@@ -2,7 +2,7 @@
   <header>
     <h1 id="title">Questions {{ questionPage }}</h1>
     <div class="bar">
-      <div class="bar-progress"></div>
+      <div class="bar-progress" :style="{ width: pagePercent }"></div>
     </div>
   </header>
 </template>
@@ -10,7 +10,7 @@
 <script setup>
 import { defineProps } from 'vue'
 
-const { questionPage } = defineProps(['questionPage'])
+const { questionPage, pagePercent } = defineProps(['questionPage', 'pagePercent'])
 </script>
 
 <style scoped>
@@ -32,7 +32,7 @@ header {
 }
 
 .bar-progress {
-  width: 50%;
+  width: 0%;
   height: 100%;
   background-color: #23b41b;
 }

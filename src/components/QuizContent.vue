@@ -3,7 +3,12 @@
     <h3 class="question-title">{{ question.text }}</h3>
   </section>
   <section id="option-container">
-    <div class="option" v-for="option in question.answers" :key="option.id">
+    <div
+      class="option"
+      v-for="option in question.answers"
+      :key="option.id"
+      @click="selectedOption(option)"
+    >
       <p class="option-label">{{ option.label }}</p>
       <div class="option-value">{{ option.text }}</div>
     </div>
@@ -11,9 +16,14 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps } from 'vue'
 
 const { question } = defineProps(['question'])
+const emit = defineEmits(['selectOption'])
+
+function selectedOption(option) {
+  emit('selectOption', option)
+}
 </script>
 
 <style scoped>
@@ -22,9 +32,9 @@ const { question } = defineProps(['question'])
 }
 
 .question-title {
-    font-size: 25px;
-    font-weight: bold;
-    margin-bottom: 20px;
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
 #option-container {
@@ -60,7 +70,7 @@ const { question } = defineProps(['question'])
   border-radius: 50%;
   display: flex;
   align-items: center;
-  justify-content: center
+  justify-content: center;
 }
 
 .option-value {
